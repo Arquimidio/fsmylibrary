@@ -1,0 +1,8 @@
+POST http://localhost:3001/signup
+Content-Type: application/json
+
+{
+  "name": "ElAgiota",
+  "email": "agiotex@gmail.com",
+  "password": "nootnoot"
+}

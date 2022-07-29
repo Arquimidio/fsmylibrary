@@ -1,0 +1,12 @@
+POST http://localhost:3001/api/books
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhYnJpZWxzdG9wcGFkb3NzYW50b3NAZ21haWwuY29tIiwiaWQiOiI2MmUyOGMwNmI2YzQ1NTJkMTNlOTAwZDEiLCJpYXQiOjE2NTkwMjk5NDB9.R24bGCXcAwo9DGvtEXPAXWd-UpiAf5r41y2R---Gltk
+
+{
+  "title": "O Nome da Rosa",
+  "author": "Ritchie",
+  "numberOfPages": 100,
+  "pagesRead": 10,
+  "wasRead": true,
+  "notes": "engodo"
+}
