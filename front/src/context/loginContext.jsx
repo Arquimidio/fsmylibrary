@@ -12,8 +12,23 @@ function LoginContextProvider(props){
         setUser(null)
     }
 
+    const updateBooks = (newBook) => {
+        console.log(newBook)
+        setUser(prevUser => (
+            {
+                ...prevUser, 
+                books: prevUser.books.concat(newBook)
+            }
+        ))
+    }
+
     return(
-        <loginContext.Provider value={ { user, logUser, logout } }>
+        <loginContext.Provider value={ { 
+            user, 
+            logUser, 
+            logout,
+            updateBooks
+        } }>
             { props.children }
         </loginContext.Provider>
     )

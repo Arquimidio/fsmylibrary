@@ -56,7 +56,9 @@ userSchema.statics.signup = async function(name, email, password){
 }
 
 userSchema.statics.login = async function(email, password){
-  const user = await this.findOne({ email }).populate()
+  const user = await this
+    .findOne({ email })
+    .populate('books')
 
   const passwordCorrect = user === null
     ? false

@@ -7,7 +7,6 @@ const config = require('../utils/config')
 const getToken = (req) => {
   const authorization = req.get('authorization')
   if(authorization && authorization.toLowerCase().startsWith('bearer ')){
-    console.log(authorization)
     return authorization.substring(7)
   }
 
@@ -21,10 +20,12 @@ const create = async (req, res) => {
     numberOfPages,
     wasRead,
     pagesRead,
+    cover,
     notes 
   } = req.body
 
   const token = getToken(req)
+
   const decodedToken = jwt.verify(token, config.SECRET)
 
   if(!decodedToken.id){
@@ -42,6 +43,7 @@ const create = async (req, res) => {
     wasRead,
     pagesRead,
     notes,
+    cover,
     user: user._id
   })
 

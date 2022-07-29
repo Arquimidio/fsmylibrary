@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import useForm from './hooks/useForm'
 import Nav from './components/Nav'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
@@ -7,6 +8,7 @@ import AllBooks from './components/AllBooks'
 import Protected from './components/Protected'
 import MyBooks from './components/MyBooks'
 import authServices from './services/authServices'
+import bookServices from './services/bookServices'
 import { loginContext } from './context/loginContext'
 import './App.css'
 
@@ -20,9 +22,15 @@ const DEFAULT_SIGNUP = {
 }
 
 function App() {
-  const { user, logUser, logout } = useContext(loginContext)
-  const [signup, setSignup] = useState(DEFAULT_SIGNUP)
-  const [login, setLogin] = useState(DEFAULT_LOGIN)
+  const { 
+    user, 
+    logUser, 
+    logout,
+    updateBooks 
+  } = useContext(loginContext)
+
+  const [signup, setSignup] = useForm(DEFAULT_SIGNUP)
+  const [login, setLogin] = useForm(DEFAULT_LOGIN)
 
   const signupUser = async (event) => {
     event.preventDefault()
@@ -44,14 +52,11 @@ function App() {
     }
   }
   
-  const handleForm = (fn) => {
-    return (event) => {
-      const { value, name } = event.target
-      fn(prevVal => ({
-        ...prevVal,
-        [name]: value
-      }))
-    }
+  const addNewBook = async (selectedBook) => {
+    const newBook = await bookServices
+      .addBook(user.token, selectedBook)
+    
+    updateBooks(newBook)
   }
 
   return (
@@ -62,7 +67,7 @@ function App() {
           path="/login" 
           element={
             <LoginForm 
-              handler={ handleForm(setLogin) }
+              handler={ setLogin }
               formState={ login }
               submit={ loginUser }
             />
@@ -72,7 +77,7 @@ function App() {
           path="/signup" 
           element={
             <SignupForm 
-              handler={ handleForm(setSignup) }
+              handler={ setSignup }
               formState={ signup }
               submit={ signupUser }
             />
@@ -89,7 +94,9 @@ function App() {
         <Route 
           path='/allBooks'
           element={
-            <AllBooks />
+            <AllBooks
+              addNewBook={ addNewBook }
+            />
           } 
         />
       </Routes>
