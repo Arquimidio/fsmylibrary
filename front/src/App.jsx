@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import useForm from './hooks/useForm'
 import Nav from './components/Nav'
@@ -7,10 +7,12 @@ import SignupForm from './components/SignupForm'
 import AllBooks from './components/AllBooks'
 import Protected from './components/Protected'
 import MyBooks from './components/MyBooks'
+import Footer from './components/Footer'
 import authServices from './services/authServices'
 import bookServices from './services/bookServices'
 import { loginContext } from './context/loginContext'
 import './App.css'
+
 
 const DEFAULT_LOGIN = {
   email: '',
@@ -60,8 +62,11 @@ function App() {
   }
 
   return (
-    <div>
-      <Nav />
+    <>
+    <div className='content-container'>
+      <header>
+        <Nav />
+      </header>
       <Routes>
         <Route 
           path="/login" 
@@ -100,7 +105,9 @@ function App() {
           } 
         />
       </Routes>
-    </div>
+      </div>
+      <Footer />
+    </>
   )
 }
 

@@ -11,14 +11,23 @@ export default function Nav(){
       user
       ? 
         <div>
-          <h3>Hello, { user.name }!</h3>
-          <Link to='/mybooks'>My books</Link>
-          <button onClick={ logout }>Log out</button>
+          <span>Hello, { user.name }!</span>
+          <Link 
+            to='/mybooks'
+            className="btn btn-hollow"
+          >My books</Link>
+          <a className="btn btn-fill" onClick={ logout }>Log out</a>
         </div>
       : 
         <div>
-          <Link to='/login'>Login</Link>
-          <Link to='/signup'>Sign up</Link>
+          <Link 
+            className="btn btn-hollow"
+            to='/login'
+          >Login</Link>
+          <Link 
+            className="btn btn-fill"
+            to='/signup'
+          >Sign up</Link>
         </div>
     }
     </nav>

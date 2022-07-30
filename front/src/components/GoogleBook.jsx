@@ -2,17 +2,20 @@ export default function GoogleBook({
     bookInfo,
     selectBook
 }){
+
     const DEFAULT_COVER = 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg'
     
     const styles = {
         backgroundImage: `url(${ bookInfo?.cover ||  DEFAULT_COVER})`
     }
+
     return(
         <div className="book-info-wrapper">
             <div style={styles} className="book"></div>
             <button 
+                className="select"
                 onClick={selectBook(bookInfo)}
-            >Select</button>
+            >+</button>
             <p>
                 <span className="book-text-info title-span">{ bookInfo.title }</span>
                 <span className="book-text-info">{ bookInfo.author || 'Unknown'}</span>

@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+import Search from "./Search"
 import GoogleBook from "./GoogleBook"
 import BookForm from "./BookForm"
 
@@ -52,24 +53,23 @@ export default function AllBooks({ addNewBook }){
                     bookInfo={selectedBook}
                 />
             }
-            <div className="container">
-                <form onSubmit={ searchBooks }>
-                    <input
-                        value={ query }
-                        onChange={ changeQuery }
-                        placeholder="Title..."
-                    />
-                    <button>Search</button>
-                </form>
-            </div>
-            <div className="books-container">
+            <Search 
+                searchBooks={searchBooks}
+                query={query}
+                changeQuery={changeQuery}
+            />
+            <div className="books-container container">
                 {
+                    books.length
+                    ?
                     books.map(book => (
                         <GoogleBook 
                             bookInfo={ book }
                             selectBook={selectBook}
                         />
                     ))
+                    :
+                    <h3>Search for your books...</h3>
                 }
             </div>
         </div>

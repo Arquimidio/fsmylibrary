@@ -1,35 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .container{
     max-width: 1300px;
-    width: 95%;
+    width: 93%;
     margin: 0 auto;
+}
+
+:root{
+    --main-blue: #376DF1;
+    --contrast-blue-light: white;
+    --contrast-blue-dark: #1b44ad;
+}
+
+#root{
+    font-family: 'Inter', 'Helvetica', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    background-color: rgb(243, 243, 243);
+}
+
+header{
+    background-color: var(--main-blue);
 }
 
 nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1.5rem 0;
+    color: var(--contrast-blue-light);
+}
+
+a{
+    text-decoration: none;
+    color: var(--contrast-blue-light);;
+}
+
+h1{
+    font-size: 3rem;
+    font-family: 'Merriweather', serif;
+    font-weight: lighter;
+}
+
+input{
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--main-blue);
+}
+
+button,
+label{
+    cursor: pointer;
+}
+
+
+.content-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
+.btn{
+    padding: .7em 1.8em;
+    border-radius: 10px;
+    margin-left: 1rem;
+    border: none;
+}
+
+.btn-fill{
+    background-color: var(--contrast-blue-dark);
+    color: white;
+}
+
+.btn-main{
+    background-color: var(--main-blue);
+    color: white;
+}
+
+.btn-hollow{
+    border: 1px solid var(--contrast-blue-light)
+}
+
+.search-bar{
+    background-color: var(--contrast-blue-dark);
+}
+
+.search-form{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+}
+
+.field-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    height: 100%;
+    padding: 2.5rem;
+    background-color: gainsboro;
+    border-radius: 10px;
+}
+
+.login-wrapper{
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/stripes-light.png');
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-wrapper .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.book-form-wrapper{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(58, 58, 58, 0.274);
+    z-index: 3;
+    top: 0;
+    left: 0;
 }
 
 .books-container{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    background: white;
     max-width: 1300px;
     margin: 0 auto;
-}
-
-.book-info-wrapper{
-    display: block;
-    background: #E6F4F1;
-    border-radius: 20px;
-    margin: 10px;
-    position: relative;
-    box-shadow: 1px 2px 10px rgba(0,0,0,0.2);
-    opacity: 1;
-    transition: all 0.8s;
-    max-width: 300px;
-    overflow: hidden;
+    padding: 2rem 0;
+    gap: 1rem;
 }
 
 .books-container p{
@@ -40,6 +162,18 @@ nav{
     font-family: sans-serif;
     font-size: 0.9rem;
     height: 100%;
+}
+
+.book-info-wrapper{
+    display: block;
+    background: #E6F4F1;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 1px 2px 10px rgba(0,0,0,0.2);
+    opacity: 1;
+    transition: all 0.8s;
+    max-width: 280px;
+    overflow: hidden;
 }
 
 .book{
@@ -126,4 +260,26 @@ nav{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.select{
+    background-color: var(--main-blue);
+    border-radius: 50%;
+    padding: .3em .6em;
+    position: absolute;
+    top: 1.5%;
+    right: 1.5%;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.3rem;
+}
+
+footer{
+    text-align: center;
+    background-color: var(--main-blue);
+    color: white;
+    padding: 2rem;
+    margin-top: auto;
+    justify-self: flex-start;
 }

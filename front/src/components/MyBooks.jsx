@@ -6,7 +6,7 @@ export default function MyBooks(){
     const { user } = useContext(loginContext)
     console.log(user)
     return(
-        <div>
+        <div className="books-container">
             {
                 user.books.map(book => (
                     <Book bookInfo={ book } />

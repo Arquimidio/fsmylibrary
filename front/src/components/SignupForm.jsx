@@ -1,3 +1,6 @@
+import RedirectOnAuth from "./RedirectOnAuth"
+import Field from "./Field"
+
 export default function SignupForm({
   handler,
   formState,
@@ -5,27 +8,31 @@ export default function SignupForm({
 }){
   
   return(
-    <form onSubmit={ submit } className="container">
-      <input 
-        name="name"
-        value={ formState.name }
-        onChange={ handler } 
-        placeholder="Name"
-      />
-      <input
-        name="email"
-        value={ formState.email }
-        onChange={ handler }  
-        placeholder="Email"
-      />
-      <input 
-        name="password"
-        value={ formState.password }
-        onChange={ handler } 
-        type="password" 
-        placeholder="Password"
-      />
-      <button>Log in</button>
-    </form>
+    <RedirectOnAuth path='/allBooks'>
+      <div className="container">
+        <form onSubmit={ submit } className="auth-form">
+          <Field 
+            name="name"
+            value={ formState.name }
+            handler={ handler }
+            placeholder="e.g. John Doe"
+          />
+          <Field
+            name="email"
+            handler={ handler }
+            value={ formState.email }
+            placeholder="someone@example.com"
+          />
+          <Field 
+            name="password"
+            handler={ handler }
+            value={ formState.password }
+            placeholder="••••••••"
+            type="password"
+          />
+          <button className="btn btn-main">Log in</button>
+        </form>
+      </div>
+    </RedirectOnAuth>
   )
 }
