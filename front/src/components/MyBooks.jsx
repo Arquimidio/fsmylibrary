@@ -4,14 +4,16 @@ import Book from "./Book"
 
 export default function MyBooks(){
     const { user } = useContext(loginContext)
-    console.log(user)
+
     return(
-        <div className="books-container">
-            {
-                user.books.map(book => (
-                    <Book bookInfo={ book } />
-                ))
-            }
+        <div className="container">
+            <div className="books-container">
+                {
+                    user.books.map(book => (
+                        <Book bookInfo={ book } />
+                    ))
+                }
+            </div>
         </div>
     )
 }

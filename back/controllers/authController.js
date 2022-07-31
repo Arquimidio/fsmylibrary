@@ -7,6 +7,13 @@ const allUsers = async (req, res) => {
   res.status(200).json(users)
 }
 
+const retrieve_post = async (req, res) => {
+  const { token } = req.body
+  const { id } = jwt.verify(token, config.SECRET)
+  const user = await User.findById(id).populate('books')
+  res.status(200).json({ ...user._doc, token })
+}
+
 const login_post = async (req, res) => {
   const { email, password } = req.body
   const { token, user } = await User.login(email, password)
@@ -37,5 +44,6 @@ const signup_post = async (req, res) => {
 module.exports = {
   allUsers,
   login_post,
-  signup_post
+  signup_post,
+  retrieve_post
 }

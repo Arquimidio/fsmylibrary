@@ -4,7 +4,7 @@ import Search from "./Search"
 import GoogleBook from "./GoogleBook"
 import BookForm from "./BookForm"
 
-const API_URL = 'https://www.googleapis.com/books/v1/volumes?key=AIzaSyDDA3ljWm7b3v95Pw4ngO_xMt38aosrlv4'
+const API_URL = 'https://www.googleapis.com/books/v1/volumes?key=AIzaSyDDA3ljWm7b3v95Pw4ngO_xMt38aosrlv4&maxResults=12&printType=books'
 
 export default function AllBooks({ addNewBook }){
     const [books, setBooks] = useState([])
@@ -25,9 +25,13 @@ export default function AllBooks({ addNewBook }){
         }
     }
 
+    const clearSelectedBook = () => {
+        setSelectedBook(null)
+    }
+
     const changeBooks = async (url) => {
         const { data: { items } } = await axios.get(url)
-        const information = items.map(formatBook)
+        const information = items?.map(formatBook) || []
         setBooks(information)
     }
     
@@ -51,6 +55,7 @@ export default function AllBooks({ addNewBook }){
                 <BookForm 
                     addNewBook={addNewBook}
                     bookInfo={selectedBook}
+                    clearSelectedBook={clearSelectedBook}
                 />
             }
             <Search 
@@ -69,7 +74,7 @@ export default function AllBooks({ addNewBook }){
                         />
                     ))
                     :
-                    <h3>Search for your books...</h3>
+                    <h3>No books found for this search</h3>
                 }
             </div>
         </div>

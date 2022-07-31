@@ -28,7 +28,23 @@ const login = async (loginData) => {
   }
 }
 
+const retrieveUser = async (token) => {
+  try{
+    if(token){
+      const user = await axios.post(
+        `${MAIN_PATH}/retrieve`,
+        { token }
+      )
+
+      return user.data
+    }
+  }catch(error){
+    console.log(error)
+  }
+}
+
 export default {
   signup,
-  login
+  login,
+  retrieveUser
 }

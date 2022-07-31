@@ -1,59 +1,29 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import useForm from './hooks/useForm'
 import Nav from './components/Nav'
+import HomePage from './components/HomePage'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 import AllBooks from './components/AllBooks'
 import Protected from './components/Protected'
 import MyBooks from './components/MyBooks'
 import Footer from './components/Footer'
-import authServices from './services/authServices'
 import bookServices from './services/bookServices'
 import { loginContext } from './context/loginContext'
 import './App.css'
 
 
-const DEFAULT_LOGIN = {
-  email: '',
-  password: ''
-}
-const DEFAULT_SIGNUP = {
-  ...DEFAULT_LOGIN, 
-  name: ''
-}
-
 function App() {
   const { 
-    user, 
-    logUser, 
-    logout,
-    updateBooks 
+    user,
+    retrieveUser,
+    updateBooks,
   } = useContext(loginContext)
 
-  const [signup, setSignup] = useForm(DEFAULT_SIGNUP)
-  const [login, setLogin] = useForm(DEFAULT_LOGIN)
+  useEffect(() => {
+    retrieveUser()
+  }, [])
 
-  const signupUser = async (event) => {
-    event.preventDefault()
-    try{
-      const userData = await authServices.signup(signup)
-      logUser(userData)
-    }catch(error){
-      console.log(error)
-    }
-  }
-
-  const loginUser = async (event) => {
-    event.preventDefault()
-    try{
-      const userData = await authServices.login(login)
-      logUser(userData)
-    }catch(error){
-      console.log(error)
-    }
-  }
-  
   const addNewBook = async (selectedBook) => {
     const newBook = await bookServices
       .addBook(user.token, selectedBook)
@@ -64,29 +34,20 @@ function App() {
   return (
     <>
     <div className='content-container'>
-      <header>
-        <Nav />
-      </header>
+      <Nav />
       <Routes>
         <Route 
+          exact
+          path='/'
+          element={ <HomePage /> }
+        />
+        <Route 
           path="/login" 
-          element={
-            <LoginForm 
-              handler={ setLogin }
-              formState={ login }
-              submit={ loginUser }
-            />
-          } 
+          element={ <LoginForm /> } 
         />
         <Route 
           path="/signup" 
-          element={
-            <SignupForm 
-              handler={ setSignup }
-              formState={ signup }
-              submit={ signupUser }
-            />
-          } 
+          element={ <SignupForm /> } 
         />
         <Route 
           path='/mybooks'

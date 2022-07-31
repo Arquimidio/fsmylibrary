@@ -4,8 +4,7 @@ export default function useForm(DEFAULT_VALUE){
   const [form, setForm] = useState(DEFAULT_VALUE)
 
   const handleForm = (event) => {
-      console.log(form)
-      if(typeof event === 'object'){
+      if(typeof event === 'object' && event){
         const { 
           value, 
           name, 
