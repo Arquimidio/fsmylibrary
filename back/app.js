@@ -4,6 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const booksRouter = require('./routes/booksRouter')
 const authRouter = require('./routes/authRoutes')
+const { extractToken, extractUser } = require('./utils/middleware')
 const config = require('./utils/config')
 
 mongoose.connect(config.MONGODB_URI)
@@ -14,7 +15,8 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(express.json())
 app.use(cors())
+app.use(extractToken)
 app.use('/', authRouter)
-app.use('/api/books', booksRouter)
+app.use('/api/books', extractUser, booksRouter)
 
 module.exports = app

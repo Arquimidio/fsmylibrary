@@ -1,17 +1,4 @@
-const jwt = require('jsonwebtoken')
 const Book = require('../models/book')
-const User = require('../models/user')
-const config = require('../utils/config')
-
-
-const getToken = (req) => {
-  const authorization = req.get('authorization')
-  if(authorization && authorization.toLowerCase().startsWith('bearer ')){
-    return authorization.substring(7)
-  }
-
-  return null
-}
 
 const create = async (req, res) => {
   const { 
@@ -24,17 +11,7 @@ const create = async (req, res) => {
     notes 
   } = req.body
 
-  const token = getToken(req)
-
-  const decodedToken = jwt.verify(token, config.SECRET)
-
-  if(!decodedToken.id){
-    return res
-      .status(401)
-      .json({ error: 'token missing or invalid' })
-  }
-
-  const user = await User.findById(decodedToken.id)
+  const { user } = req
 
   const book = new Book({
     title,
@@ -44,7 +21,7 @@ const create = async (req, res) => {
     pagesRead,
     notes,
     cover,
-    user: user._id
+    user: user.id
   })
 
   const savedBook = await book.save()
