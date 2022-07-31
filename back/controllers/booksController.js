@@ -31,6 +31,22 @@ const create = async (req, res) => {
   res.status(200).json(savedBook)
 }
 
+const remove = async (req, res) => {
+  const { id } = req.params
+  const user = req.user
+
+  const book = await Book.findById(id)
+
+  if(book.user.toString() === user.id){
+    await Book.deleteOne(book)
+    user.books = user.books.filter(bookId => bookId.toString() !== book.id)
+    await user.save()
+  }
+
+  return res.status(204).end()
+}
+
 module.exports = {
-  create
+  create,
+  remove
 }

@@ -11,6 +11,7 @@ const retrieve_post = async (req, res) => {
   const { token } = req.body
   const { id } = jwt.verify(token, config.SECRET)
   const user = await User.findById(id).populate('books')
+  delete user._doc.passwordHash
   res.status(200).json({ ...user._doc, token })
 }
 

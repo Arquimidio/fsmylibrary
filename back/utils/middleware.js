@@ -20,6 +20,7 @@ const extractUser = async (req, res, next) => {
         if(decodedToken.id){
             const user = await User.findById(decodedToken.id)
             if(user){
+                delete user.passwordHash
                 req.user = user
             }
         }

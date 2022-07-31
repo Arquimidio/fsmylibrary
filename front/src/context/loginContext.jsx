@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import useForm from "../hooks/useForm"
 import authServices from "../services/authServices"
+import bookServices from "../services/bookServices"
 const loginContext = React.createContext(null)
 
 function LoginContextProvider(props){
@@ -55,7 +56,6 @@ function LoginContextProvider(props){
         const token = localStorage.getItem('jwt')
         if(token){
             const user = await authServices.retrieveUser(token)
-            console.log(user)
             setUser(user)
         } 
     }
@@ -69,11 +69,27 @@ function LoginContextProvider(props){
         ))
     }
 
+    const handleDeletion = (token, id) => {
+        return () => {
+            try{
+                bookServices.deleteBook(token, id)
+                console.log(user.books)
+                setUser(prevUser => ({
+                    ...prevUser,
+                    books: prevUser.books.filter(book => book._id.toString() !== id)
+                }))
+            }catch(error){
+                console.log(error)
+            }
+        }
+    }
+
     return(
         <loginContext.Provider value={ { 
             user, 
             logout,
             updateBooks,
+            handleDeletion,
             loginUser,
             signupUser,
             login,
