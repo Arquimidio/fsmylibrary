@@ -10,7 +10,10 @@ export default function Book({ bookInfo }){
 
     return(
         <div className="book-info-wrapper">
-            <button onClick={handleDeletion(user.token, bookInfo._id)}>Delete</button>
+            <button 
+                onClick={handleDeletion(user.token, bookInfo._id)}
+                className="delete"
+            >X</button>
             <div style={styles} className="book"></div>
             <p>
                 <span className="book-text-info title-span">{ bookInfo.title }</span>

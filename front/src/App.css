@@ -21,6 +21,7 @@
     --transparent-light-blue: rgba(164, 181, 255, 0.589);
     --book-wrapper-bg: var(--transparent-light-blue);
     --book-info-bg: var(--contrast-blue-dark);
+    --logout: rgb(230, 83, 72);
 }
 
 #root{
@@ -330,8 +331,8 @@ nav .btn{
     text-overflow: ellipsis;
 }
 
-.select{
-    background-color: var(--main-blue);
+.select,
+.delete{
     border-radius: 50%;
     padding: .3em .6em;
     position: absolute;
@@ -341,6 +342,18 @@ nav .btn{
     color: white;
     font-weight: bolder;
     font-size: 1.3rem;
+}
+
+.select{
+    background-color: var(--main-blue);
+}
+
+.delete{
+    background-color: var(--logout);
+}
+
+.logout{
+    background-color: var(--logout);
 }
 
 footer{

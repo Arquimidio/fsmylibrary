@@ -4,6 +4,33 @@ import { loginContext } from '../context/loginContext'
 
 export default function Nav(){
   const { user, logout } = useContext(loginContext)
+
+  const renderLoggedIn = () => {
+    return (
+      <div>
+            <Link 
+              to='/mybooks'
+              className="btn btn-hollow"
+            >My books</Link>
+            <a className="btn btn-fill logout" onClick={ logout }>Log out</a>
+      </div>
+    )
+  }
+
+  const renderLoggedOut = () => {
+    return (
+      <div>
+        <Link 
+          className="btn btn-hollow"
+          to='/login'
+        >Login</Link>
+        <Link 
+          className="btn btn-fill"
+          to='/signup'
+        >Sign up</Link>
+      </div>
+    )
+  }
   return(
     <header>
       <nav className="container">
@@ -16,26 +43,7 @@ export default function Nav(){
           <Link to='/allBooks' className="nav-link">All books</Link>
         </div>
       {
-        user
-        ? 
-          <div>
-            <Link 
-              to='/mybooks'
-              className="btn btn-hollow"
-            >My books</Link>
-            <a className="btn btn-fill" onClick={ logout }>Log out</a>
-          </div>
-        : 
-          <div>
-            <Link 
-              className="btn btn-hollow"
-              to='/login'
-            >Login</Link>
-            <Link 
-              className="btn btn-fill"
-              to='/signup'
-            >Sign up</Link>
-          </div>
+        user? renderLoggedIn() : renderLoggedOut()
       }
       </nav>
     </header>
