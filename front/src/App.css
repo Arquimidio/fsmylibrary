@@ -18,6 +18,7 @@
     --contrast-blue-light: white;
     --contrast-blue-dark: #3282B8;
     --light-blue: #BBE1FA;
+    --light-grey: #c4e7f0;
     --transparent-light-blue: rgba(164, 181, 255, 0.589);
     --book-wrapper-bg: var(--transparent-light-blue);
     --book-info-bg: var(--contrast-blue-dark);
@@ -87,6 +88,24 @@ label{
     color: var(--main-blue);
 }
 
+meter{
+    width: 100%;
+    padding: 0 .1rem;
+    height: 1.3rem;
+}
+
+meter::-webkit-meter-bar {
+    background: var(--light-grey);
+    border: none;
+}
+
+meter::-webkit-meter-optimum-value {
+    background: var(--main-blue);
+}
+
+meter::-moz-meter-bar { 
+    background: var(--main-blue);
+}
 
 .content-container{
     display: flex;
@@ -220,7 +239,6 @@ nav .btn{
     max-width: 1300px;
     margin: 0 auto;
     padding: 2rem 0;
-    gap: 1rem;
 }
 
 .books-container p{
@@ -321,6 +339,11 @@ nav .btn{
 
 .book-text-info{
     display: block;
+}
+
+.progress-bar-label{
+    display: block;
+    text-align: center;
 }
 
 .title-span{

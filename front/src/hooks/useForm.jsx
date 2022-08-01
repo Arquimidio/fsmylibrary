@@ -3,7 +3,7 @@ import { useState } from "react"
 export default function useForm(DEFAULT_VALUE){
   const [form, setForm] = useState(DEFAULT_VALUE)
 
-  const handleForm = (event) => {
+  const handleForm = (event, fieldValue) => {
       if(typeof event === 'object' && event){
         const { 
           value, 
@@ -23,6 +23,11 @@ export default function useForm(DEFAULT_VALUE){
             [name]: checked
           }))
         }
+      }else if(typeof event === 'string' && fieldValue !== undefined){
+        setForm(prevVal => ({
+          ...prevVal,
+          [event]: fieldValue
+        }))
       }else{
         setForm(DEFAULT_VALUE)
       }

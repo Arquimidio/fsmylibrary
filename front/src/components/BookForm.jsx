@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import useForm from "../hooks/useForm"
 import Protected from "./Protected"
 
@@ -9,11 +10,19 @@ export default function BookForm({
 
   const BOOK_DEFAULT = {
     wasRead: false,
+    numberOfPages: bookInfo.numberOfPages,
     pagesRead: 0,
     notes: ''
 }
 
   const [bookProgress, setBookProgress] = useForm(BOOK_DEFAULT)
+
+  useEffect(() => {
+    if(bookProgress.wasRead){
+      setBookProgress('pagesRead', bookProgress.numberOfPages)
+    }
+  }, [bookProgress.wasRead])
+
 
   const sendNewBook = (event) => {
     event.preventDefault()
@@ -24,9 +33,6 @@ export default function BookForm({
   const pagesVal = bookProgress.wasRead
     ? bookInfo?.numberOfPages || 0
     : bookProgress.pagesRead
-
-  const maxPages = bookInfo?.numberOfPages || 4000
-
 
   return (
     <Protected>
@@ -42,10 +48,14 @@ export default function BookForm({
               onChange={setBookProgress}
             />
             <input 
-              type='range'
+              type='number'
+              name='numberOfPages'
+              value={bookProgress.numberOfPages}
+              onChange={setBookProgress}
+            />
+            <input 
+              type='number'
               name='pagesRead'
-              min='0'
-              max={maxPages}
               value={pagesVal}
               onChange={setBookProgress}
               disabled={bookProgress.wasRead}
