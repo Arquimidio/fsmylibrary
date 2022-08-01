@@ -54,9 +54,13 @@ nav{
     font-size: 1.2rem;
 }
 
+.nav-link:hover{
+    color: var(--contrast-blue-dark);
+}
+
 a{
     text-decoration: none;
-    color: var(--contrast-blue-light);;
+    color: var(--contrast-blue-light);
 }
 
 h1{

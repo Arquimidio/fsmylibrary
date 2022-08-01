@@ -9,9 +9,11 @@ export default function MyBooks(){
         <div className="container">
             <div className="books-container">
                 {
-                    user.books.map(book => (
+                    user.books.length
+                    ? user.books.map(book => (
                         <Book bookInfo={ book } />
-                    ))
+                      ))
+                    : <div>This looks empty...add some books here!</div>
                 }
             </div>
         </div>
